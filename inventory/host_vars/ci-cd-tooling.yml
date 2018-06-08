@@ -43,52 +43,26 @@ openshift_cluster_content:
     params: "{{ playbook_dir }}/params/tool-box/build"
     namespace: "{{ ci_cd_namespace }}"
     tags:
-      - tool-box
-  - name: hoverfly
-    template: "{{ playbook_dir }}/openshift-templates/docker-build/template.yaml"
-    params: "{{ playbook_dir }}/params/hoverfly/build"
-    namespace: "{{ ci_cd_namespace }}"
-    tags:
-      - hoverfly
+      - tool-boxs
 - object: ci-cd-deployments
   content:
-  - name: jenkins-persistent
-    template: "{{ playbook_dir }}/openshift-templates/jenkins/jenkins-persistent-template.yaml"
-    params: "{{ playbook_dir }}/params/jenkins/deploy"
-    namespace: "{{ ci_cd_namespace }}"
-    tags:
-    - jenkins
-  - name: nexus
-    template: "{{ playbook_dir }}/openshift-templates/nexus/template.json"
-    params: "{{ playbook_dir }}/params/nexus/deploy"
-    namespace: "{{ ci_cd_namespace }}"
-    tags:
-    - nexus
-    post_steps:
-    - role: "labs-ci-cd/roles/configure-nexus"
   - name: sonarqube
     template: "{{ playbook_dir }}/openshift-templates/sonarqube/template.yaml"
     params: "{{ playbook_dir }}/params/sonarqube/build-and-deploy"
     namespace: "{{ ci_cd_namespace }}"
     tags:
     - sonar
-  - name: sonarqube-postgresql
-    template: "openshift//postgresql-persistent"
-    params: "{{ playbook_dir }}/params/sonarqube/postgresql"
+  - name: nexus
+    template: "{{ playbook_dir }}/openshift-templates/nexus/template.yaml"
+    params: "{{ playbook_dir }}/params/nexus/deploy"
     namespace: "{{ ci_cd_namespace }}"
     tags:
-    - sonar
-  - name: hoverfly
-    template: "{{ playbook_dir }}/openshift-templates/hoverfly/template.yaml"
-    params: "{{ playbook_dir }}/params/hoverfly/deploy"
+    - nexus
+  - name: jenkins-persistent
+    template: "{{ playbook_dir }}/openshift-templates/jenkins/jenkins-persistent-template.yaml"
+    params: "{{ playbook_dir }}/params/jenkins/deploy"
     namespace: "{{ ci_cd_namespace }}"
     tags:
-    - hoverfly
-- object: ci-for-labs-ci-cd
-  content:
-  - name: pipeline
-    template: "{{ playbook_dir }}/openshift-templates/jenkins-pipeline-no-ocp-triggers/template.yaml"
-    params: "{{ playbook_dir }}/params/ci-for-labs-ci-cd/build"
-    namespace: "{{ ci_cd_namespace }}"
-    tags:
-    - ci
+    - jenkins
+    post_steps:
+    - role: "labs-ci-cd/roles/configure-nexus"

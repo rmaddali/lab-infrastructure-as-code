@@ -447,7 +447,7 @@ parameters:
   - name: SONARQUBE_MEMORY
     description: SonarQube memory
     displayName: SonarQube memory
-    value: 2Gi
+    value: 1Gi
   - name: SONARQUBE_CPU
     description: SonarQube Container CPU limit
     displayName: SonarQube Container CPU limit
