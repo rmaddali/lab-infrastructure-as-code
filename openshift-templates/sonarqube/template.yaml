@@ -57,13 +57,13 @@ objects:
       appName: sonarqube
       name: sonarqube
       type: image
-    name: sonarqube
+    name: sonarqube-openshift
   spec:
     nodeSelector: null
     output:
       to:
         kind: ImageStreamTag
-        name: sonarqube:latest
+        name: sonarqube-openshift:latest
     postCommit: {}
     resources: {}
     runPolicy: Serial
@@ -301,7 +301,7 @@ objects:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
-          name: sonarqube
+          name: sonarqube-openshift
           ports:
           - containerPort: 9000
             protocol: TCP
@@ -338,7 +338,7 @@ objects:
         - sonarqube
         from:
           kind: ImageStreamTag
-          name: sonarqube:latest
+          name: sonarqube-openshift:latest
       type: ImageChange
     - type: ConfigChange
 - apiVersion: v1
