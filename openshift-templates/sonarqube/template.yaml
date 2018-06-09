@@ -303,7 +303,7 @@ objects:
               secretKeyRef:
                 key: password
                 name: sonar-ldap-bind-dn
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           image: ' '
           livenessProbe:
             failureThreshold: 3
@@ -349,7 +349,7 @@ objects:
     - imageChangeParams:
         automatic: true
         containerNames:
-        - sonarqube
+        - sonarqube-openshift
         from:
           kind: ImageStreamTag
           name: sonarqube-openshift:latest
