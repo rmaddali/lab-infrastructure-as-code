@@ -12,7 +12,7 @@ minishift start --skip-registration --iso-url=centos --cpus=4 --memory=10GB --vm
 
 oc login -u developer -p developer --insecure-skip-tls-verify=true https://$(minishift ip):8443/
 
-ansible-galaxy install -t requirements.yml --roles-path=roles
+ansible-galaxy install -r requirements.yml --roles-path=roles
 
 ansible-playbook apply.yml -i inventory/ -e target=bootstrap
 
