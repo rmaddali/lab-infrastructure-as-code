@@ -49,6 +49,19 @@ objects:
   status:
     dockerImageRepository: ""
 - apiVersion: v1
+  kind: ImageStream
+  metadata:
+    creationTimestamp: null
+    labels:
+      app: sonarqube
+      appName: sonarqube
+      name: sonarqube
+      type: image
+    name: sonarqube-openshift
+  spec:  
+    lookupPolicy:
+      local: false
+- apiVersion: v1
   kind: BuildConfig
   metadata:
     creationTimestamp: null
@@ -291,10 +304,11 @@ objects:
                 key: password
                 name: sonar-ldap-bind-dn
           imagePullPolicy: Always
+          image: ' '
           livenessProbe:
             failureThreshold: 3
             httpGet:
-              path: /
+              path: /api/system/health
               port: 9000
               scheme: HTTP
             initialDelaySeconds: 45
@@ -308,7 +322,7 @@ objects:
           readinessProbe:
             failureThreshold: 3
             httpGet:
-              path: /
+              path: /api/system/health
               port: 9000
               scheme: HTTP
             initialDelaySeconds: 10
