@@ -233,8 +233,11 @@ objects:
         timeoutSeconds: 600
       resources:
         limits:
-          cpu: "2"
-          memory: 2Gi
+          cpu: 4000m
+          memory: 3500Mi
+        requests:
+          cpu: 2000m
+          memory: 2500Mi
       type: Recreate
     template:
       metadata:
