@@ -1,6 +1,7 @@
 ---
 ansible_connection: local
 openshift_cluster_content:
+## Create OpenShift Projects/Namespaces
 - object: projectrequest
   content:
   - name: ci-cd
@@ -21,3 +22,36 @@ openshift_cluster_content:
     params: "{{ playbook_dir }}/params/projectrequests/test"
     tags:
     - projects
+## Add templates which can be used to create application build/deployment pipelines
+- object: projecttemplates
+  content:
+  - name: vertx-app-template
+    file: "{{ playbook_dir }}/openshift-templates/vertx-app-deploy/template.yaml"
+    namespace: "{{ ci_cd_namespace }}"
+    tags:
+    - vertx-build
+  - name: node-app-template
+    file: "{{ playbook_dir }}/openshift-templates/node-app-deploy/template.yaml"
+    namespace: "{{ ci_cd_namespace }}"
+    tags:
+    - npm-build
+  - name: spring-app-template
+    file: "{{ playbook_dir }}/openshift-templates/spring-app-deploy/template.yaml"
+    namespace: "{{ ci_cd_namespace }}"
+    tags:
+    - spring-build
+## Add `view` role to service accounts for integration with ConfigMaps
+- object: rolebindings
+  content:
+  - name: fabric8-rolebinding
+    template: "{{ playbook_dir }}/openshift-templates/fabric8-role-bindings/template.yaml"
+    params: "{{ playbook_dir }}/params/java-app/fabric8_test"
+    namespace: "{{ test_namespace }}"
+    tags:
+    - java-deploy
+  - name: fabric8-rolebinding
+    template: "{{ playbook_dir }}/openshift-templates/fabric8-role-bindings/template.yaml"
+    params: "{{ playbook_dir }}/params/java-app/fabric8_test"
+    namespace: "{{ dev_namespace }}"
+    tags:
+    - java-deploy

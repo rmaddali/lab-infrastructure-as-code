@@ -2,6 +2,19 @@
 ansible_connection: local
 openshift_cluster_content:
 - galaxy_requirements: "{{ playbook_dir }}/galaxy_requirements.yml"
+- object: early-ci-cd-builds
+  - name: sonarqube
+    template: "{{ playbook_dir }}/openshift-templates/sonarqube/template.yaml"
+    params: "{{ playbook_dir }}/params/sonarqube/build-and-deploy"
+    namespace: "{{ ci_cd_namespace }}"
+    tags:
+    - sonar
+  - name: nexus
+    template: "{{ playbook_dir }}/openshift-templates/nexus/template.yaml"
+    params: "{{ playbook_dir }}/params/nexus/deploy"
+    namespace: "{{ ci_cd_namespace }}"
+    tags:
+    - nexus
 - object: ci-cd-builds
   content:
   - name: jenkins-s2i
@@ -46,18 +59,6 @@ openshift_cluster_content:
       - tool-boxs
 - object: ci-cd-deployments
   content:
-  - name: sonarqube
-    template: "{{ playbook_dir }}/openshift-templates/sonarqube/template.yaml"
-    params: "{{ playbook_dir }}/params/sonarqube/build-and-deploy"
-    namespace: "{{ ci_cd_namespace }}"
-    tags:
-    - sonar
-  - name: nexus
-    template: "{{ playbook_dir }}/openshift-templates/nexus/template.yaml"
-    params: "{{ playbook_dir }}/params/nexus/deploy"
-    namespace: "{{ ci_cd_namespace }}"
-    tags:
-    - nexus
   - name: jenkins-persistent
     template: "{{ playbook_dir }}/openshift-templates/jenkins/jenkins-persistent-template.yaml"
     params: "{{ playbook_dir }}/params/jenkins/deploy"

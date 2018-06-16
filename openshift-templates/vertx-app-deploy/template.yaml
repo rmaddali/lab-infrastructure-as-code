@@ -1,12 +1,12 @@
 apiVersion: template.openshift.io/v1
 kind: Template
 labels:
-  template: node-app-deploy-template
+  template: http-app-deploy-template
 metadata:
   annotations:
-    description: A template to deploy your a NodeJS App with a HTTP endpoint
+    description: A template to deploy your an App with a HTTP endpoint
     iconClass: icon-cube
-    openshift.io/display-name: Node HTTP App Deploy Template
+    openshift.io/display-name: HTTP App Deploy Template
     tags: http
 objects:
   - apiVersion: v1
@@ -47,6 +47,10 @@ objects:
               imagePullPolicy: Always
               name: '${NAME}'
               ports:
+                - containerPort: 5800
+                  protocol: TCP
+                - containerPort: 8778
+                  protocol: TCP
                 - containerPort: 8080
                   protocol: TCP
               resources: {}
@@ -78,6 +82,14 @@ objects:
           port: 8080
           protocol: TCP
           targetPort: 8080
+        - name: JOLOKIA
+          port: 8778
+          protocol: TCP
+          targetPort: 8778
+        - name: CLUSTER
+          port: 5800
+          protocol: TCP
+          targetPort: 5800
       selector:
         name: '${NAME}'
       sessionAffinity: None
