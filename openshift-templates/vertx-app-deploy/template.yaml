@@ -1,13 +1,13 @@
 apiVersion: template.openshift.io/v1
 kind: Template
 labels:
-  template: http-app-deploy-template
+  template: vertx-app-deploy-template
 metadata:
   annotations:
-    description: A template to deploy your an App with a HTTP endpoint
+    description: A template to deploy your Vert.x app with an HTTP endpoint
     iconClass: icon-cube
-    openshift.io/display-name: HTTP App Deploy Template
-    tags: http
+    openshift.io/display-name: Vert.x App Deploy Template
+    tags: vertx
 objects:
   - apiVersion: v1
     kind: ImageStream
