@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set -x
+set -e
+
 minishift addons enable anyuid
 minishift addons enable admin-user
 minishift addons enable xpaas
