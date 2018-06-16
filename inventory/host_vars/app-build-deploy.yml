@@ -104,15 +104,3 @@ openshift_cluster_content:
     namespace: "{{ test_namespace }}"
     tags:
     - vertx-deploy
-  - name: fabric8-rolebinding
-    template: "{{ playbook_dir }}/openshift-templates/fabric8-role-bindings/template.yaml"
-    params: "{{ playbook_dir }}/params/rolebindings/fabric8_dev"
-    namespace: "{{ test_namespace }}"
-    tags:
-    - java-deploy
-  - name: fabric8-rolebinding
-    template: "{{ playbook_dir }}/openshift-templates/fabric8-role-bindings/template.yaml"
-    params: "{{ playbook_dir }}/params/rolebindings/fabric8_test"
-    namespace: "{{ test_namespace }}"
-    tags:
-    - java-deploy
