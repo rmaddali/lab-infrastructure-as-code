@@ -148,10 +148,10 @@ objects:
     - imageChangeParams:
         automatic: true
         containerNames:
-        - owasp-zap-openshift
+        - owasp-zap
         from:
           kind: ImageStreamTag
-          name: owasp-zap-openshift:latest
+          name: owasp-zap:latest
       type: ImageChange
     - type: ConfigChange
 - apiVersion: v1
