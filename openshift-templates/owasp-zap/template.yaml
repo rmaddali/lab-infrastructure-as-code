@@ -19,7 +19,7 @@ objects:
     - annotations: null
       from:
         kind: DockerImage
-        name: owasp-zap:latest
+        name: owasp/zap2docker-stable:latest
       generation: null
       importPolicy: {}
       name: latest
