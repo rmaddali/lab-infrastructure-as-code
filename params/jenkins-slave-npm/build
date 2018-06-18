@@ -1,6 +1,6 @@
-SOURCE_REPOSITORY_URL=https://github.com/redhat-cop/containers-quickstarts.git
-SOURCE_CONTEXT_DIR=jenkins-slaves/
+SOURCE_REPOSITORY_URL=https://github.com/rht-labs/labs-ci-cd.git
+SOURCE_CONTEXT_DIR=docker/jenkins-slave-npm/
 BUILDER_IMAGE_NAME=registry.access.redhat.com/openshift3/jenkins-slave-base-rhel7:latest
 NAME=jenkins-slave-npm
 SOURCE_REPOSITORY_REF=v3.9.1
-DOCKERFILE_PATH=Dockerfile.rhel7
+DOCKERFILE_PATH=Dockerfile
