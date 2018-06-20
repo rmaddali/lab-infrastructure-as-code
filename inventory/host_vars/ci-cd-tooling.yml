@@ -102,7 +102,7 @@ openshift_cluster_content:
     params: "{{ playbook_dir }}/params/default-user-view-role/test"
     namespace: "{{ test_namespace }}"
   - name: dev-jenkins
-    template: "{{ playbook_dir }}/openshift-templates/jenkins-rolebindings/template.yaml"
+    template: "{{ playbook_dir }}/openshift-templates/service-account-rolebindings/template.yaml"
     params: "{{ playbook_dir }}/params/service-account-rolebindings/dev"
     namespace: "{{ dev_namespace }}"
   - name: test-jenkins
