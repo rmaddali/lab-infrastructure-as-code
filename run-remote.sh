@@ -3,7 +3,7 @@
 set -x
 set -e
 
-export USERNAME=''
+export USERNAME='user10'
 
 oc login -u ${USERNAME} -p "r3dh4t1!" --insecure-skip-tls-verify=true https://master.qcon.openshift.opentlc.com/
 
