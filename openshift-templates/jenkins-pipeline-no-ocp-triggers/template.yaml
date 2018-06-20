@@ -2,8 +2,15 @@
 kind: Template
 apiVersion: v1
 metadata:
-  name: jenkins-pipeline-no-ocp-triggers
-objects:
+  name: jenkins-pipeline
+objects:  
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    labels:
+      build: '${NAME}'
+    name: '${NAME}'
+  spec: {}
 - apiVersion: v1
   kind: BuildConfig
   metadata:
