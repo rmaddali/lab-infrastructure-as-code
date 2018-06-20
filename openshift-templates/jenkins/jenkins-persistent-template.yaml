@@ -79,6 +79,11 @@ objects:
             value: ${JNLP_SERVICE_NAME}
           - name: JENKINS_OPTS
             value: ${JENKINS_OPTS}
+          - name: JENKINS_JAVA_OVERRIDES
+            value: >-
+              -Dhudson.slaves.NodeProvisioner.initialDelay=0
+              -Dhudson.slaves.NodeProvisioner.MARGIN=50
+              -Dhudson.slaves.NodeProvisioner.MARGIN0=0.85
           image: ' '
           imagePullPolicy: IfNotPresent
           livenessProbe:
