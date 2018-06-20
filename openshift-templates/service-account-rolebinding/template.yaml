@@ -17,7 +17,7 @@ objects:
   subjects:
   - kind: ${SUBJECT_KIND}
     name: ${USER_NAME}
-    namespace: ${NAMESPACE}
+    namespace: ${PIPELINES_NAMESPACE}
   userNames:
   - system:serviceaccount:${PIPELINES_NAMESPACE}:${USER_NAME}
 parameters:
