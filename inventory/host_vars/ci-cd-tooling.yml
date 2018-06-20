@@ -93,14 +93,6 @@ openshift_cluster_content:
     - role: "labs-ci-cd/roles/configure-nexus"
 - object: rolebindings
   content:
-  - name: dev-default
-    template: "{{ playbook_dir }}/openshift-templates/default-user-view-role/template.yaml"
-    params: "{{ playbook_dir }}/params/default-user-view-role/dev"
-    namespace: "{{ dev_namespace }}"
-  - name: test-default
-    template: "{{ playbook_dir }}/openshift-templates/default-user-view-role/template.yaml"
-    params: "{{ playbook_dir }}/params/default-user-view-role/test"
-    namespace: "{{ test_namespace }}"
   - name: dev-jenkins
     template: "{{ playbook_dir }}/openshift-templates/service-account-rolebinding/template.yaml"
     params: "{{ playbook_dir }}/params/service-account-rolebinding/dev"
@@ -108,4 +100,12 @@ openshift_cluster_content:
   - name: test-jenkins
     template: "{{ playbook_dir }}/openshift-templates/service-account-rolebinding/template.yaml"
     params: "{{ playbook_dir }}/params/service-account-rolebinding/test"
+    namespace: "{{ test_namespace }}"
+  - name: dev-jenkins
+    template: "{{ playbook_dir }}/openshift-templates/service-account-rolebinding/template.yaml"
+    params: "{{ playbook_dir }}/params/service-account-rolebinding/default-dev"
+    namespace: "{{ dev_namespace }}"
+  - name: test-jenkins
+    template: "{{ playbook_dir }}/openshift-templates/service-account-rolebinding/template.yaml"
+    params: "{{ playbook_dir }}/params/service-account-rolebinding/default-test"
     namespace: "{{ test_namespace }}"
