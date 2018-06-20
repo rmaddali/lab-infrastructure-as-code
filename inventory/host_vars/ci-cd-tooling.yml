@@ -6,7 +6,7 @@ openshift_cluster_content:
 - object: projecttemplates
   content:
   - name: pipeline-template
-    file: "{{ playbook_dir }}/openshift-templates/jenkins-pipeline/template.yaml"
+    file: "{{ playbook_dir }}/openshift-templates/jenkins-pipeline-no-ocp-triggers/template.yaml"
     namespace: "{{ ci_cd_namespace }}"
     tags:
     - pipeline-build
@@ -91,3 +91,21 @@ openshift_cluster_content:
     - jenkins
     post_steps:
     - role: "labs-ci-cd/roles/configure-nexus"
+- object: rolebindings
+  content:
+  - name: dev-default
+    template: "{{ playbook_dir }}/openshift-templates/default-user-view-role/template.yaml"
+    params: "{{ playbook_dir }}/params/default-user-view-role/dev"
+    namespace: "{{ dev_namespace }}"
+  - name: test-default
+    template: "{{ playbook_dir }}/openshift-templates/default-user-view-role/template.yaml"
+    params: "{{ playbook_dir }}/params/default-user-view-role/test"
+    namespace: "{{ test_namespace }}"
+  - name: dev-jenkins
+    template: "{{ playbook_dir }}/openshift-templates/jenkins-rolebindings/template.yaml"
+    params: "{{ playbook_dir }}/params/jenkins-rolebindings/dev"
+    namespace: "{{ dev_namespace }}"
+  - name: test-jenkins
+    template: "{{ playbook_dir }}/openshift-templates/jenkins-rolebindings/template.yaml"
+    params: "{{ playbook_dir }}/params/jenkins-rolebindings/test"
+    namespace: "{{ test_namespace }}"
