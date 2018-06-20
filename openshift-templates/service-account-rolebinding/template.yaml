@@ -11,6 +11,7 @@ objects:
   kind: RoleBinding
   metadata:
     namespace: ${PROJECT_NAMESPACE}
+    name: edit-abcde
   roleRef:
     name: edit
   subjects:
@@ -18,15 +19,18 @@ objects:
     name: ${USER_NAME}
     namespace: ${NAMESPACE}
   userNames:
-  - ${USER_NAME}
+  - system:serviceaccount:${PIPELINES_NAMESPACE}:${USER_NAME}
 parameters:
 - name: PROJECT_NAMESPACE
   description: The namespace on which to apply this rolebinding
   displayName: Project Namespace
+- name: PIPELINES_NAMESPACE
+  description: The namespace inside of which Jenkins runs
+  displayName: Pipelines Namespace
 - name: SUBJECT_KIND
   description: The Kind of subject (User/ServiceAccount)
   displayName: Subject Kind
-  value: User
+  value: ServiceAccount
 - name: USER_NAME
   description: The short username
   displayName: Short Username

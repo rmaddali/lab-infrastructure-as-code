@@ -11,6 +11,7 @@ objects:
   kind: RoleBinding
   metadata:
     namespace: ${PROJECT_NAMESPACE}
+    name: view-abcde
   roleRef:
     name: edit
   subjects:
@@ -24,7 +25,7 @@ parameters:
   description: The namespace on which to apply this rolebinding
   displayName: Project Namespace
 - name: SUBJECT_KIND
-  description: The Kind of subject (User/ServiceAccount)
+  description: The Kind of subject
   displayName: Subject Kind
   value: User
 - name: USER_NAME
