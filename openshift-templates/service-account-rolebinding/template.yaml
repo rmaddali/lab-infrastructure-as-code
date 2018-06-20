@@ -11,9 +11,9 @@ objects:
   kind: RoleBinding
   metadata:
     namespace: ${PROJECT_NAMESPACE}
-    name: edit-abcde
+    name: ${ROLE_REF}-abcde
   roleRef:
-    name: edit
+    name: ${ROLE_REF}
   subjects:
   - kind: ${SUBJECT_KIND}
     name: ${USER_NAME}
@@ -35,3 +35,5 @@ parameters:
   description: The short username
   displayName: Short Username
   value: jenkins
+- name: ROLE_REF
+  value: edit
