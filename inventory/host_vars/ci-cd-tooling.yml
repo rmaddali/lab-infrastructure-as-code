@@ -2,24 +2,14 @@
 ansible_connection: local
 openshift_cluster_content:
 - galaxy_requirements: "{{ playbook_dir }}/galaxy_requirements.yml"
-### Add templates which can be used to create application build/deployment pipelines
-#- object: projecttemplates
-#  content:
-#  - name: vertx-app-template
-#    file: "{{ playbook_dir }}/openshift-templates/vertx-app-deploy/template.yaml"
-#    namespace: "{{ ci_cd_namespace }}"
-#    tags:
-#    - vertx-build
-#  - name: node-app-template
-#    file: "{{ playbook_dir }}/openshift-templates/node-app-deploy/template.yaml"
-#    namespace: "{{ ci_cd_namespace }}"
-#    tags:
-#    - npm-build
-#  - name: spring-app-template
-#    file: "{{ playbook_dir }}/openshift-templates/spring-app-deploy/template.yaml"
-#    namespace: "{{ ci_cd_namespace }}"
-#    tags:
-#    - spring-build
+### Add template which can be used to create application build/deployment pipelines
+- object: projecttemplates
+  content:
+  - name: pipeline-template
+    file: "{{ playbook_dir }}/openshift-templates/jenkins-pipeline/template.yaml"
+    namespace: "{{ ci_cd_namespace }}"
+    tags:
+    - pipeline-build
 ## Add `view` role to service accounts for integration with ConfigMaps
 - object: rolebindings
   content:

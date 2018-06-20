@@ -1,0 +1,33 @@
+---
+apiVersion: v1
+kind: Template
+labels:
+  template: rolebindings-template
+message: A template to apply rolebindings to a specified namespace
+name: rolebindings
+objects:
+- apiVersion: authorization.openshift.io/v1
+  groupNames: null
+  kind: RoleBinding
+  metadata:
+    namespace: ${PROJECT_NAMESPACE}
+  roleRef:
+    name: edit
+  subjects:
+  - kind: ${SUBJECT_KIND}
+    name: ${USER_NAME}
+    namespace: ${NAMESPACE}
+  userNames:
+  - ${USER_NAME}
+parameters:
+- name: PROJECT_NAMESPACE
+  description: The namespace on which to apply this rolebinding
+  displayName: Project Namespace
+- name: SUBJECT_KIND
+  description: The Kind of subject (User/ServiceAccount)
+  displayName: Subject Kind
+  value: User
+- name: USER_NAME
+  description: The short username
+  displayName: Short Username
+  value: default

@@ -22,3 +22,21 @@ openshift_cluster_content:
     params: "{{ playbook_dir }}/params/projectrequests/test"
     tags:
     - projects
+- object: rolebindings
+  content:
+  - name: dev-default
+    template: "{{ playbook_dir }}/openshift-templates/default-user-view-role/template.yaml"
+    params: "{{ playbook_dir }}/params/default-user-view-role/dev"
+    namespace: labs-dev
+  - name: test-default
+    template: "{{ playbook_dir }}/openshift-templates/default-user-view-role/template.yaml"
+    params: "{{ playbook_dir }}/params/default-user-view-role/test"
+    namespace: labs-test
+  - name: dev-jenkins
+    template: "{{ playbook_dir }}/openshift-templates/jenkins-rolebindings/template.yaml"
+    params: "{{ playbook_dir }}/params/jenkins-rolebindings/dev"
+    namespace: labs-dev
+  - name: test-jenkins
+    template: "{{ playbook_dir }}/openshift-templates/jenkins-rolebindings/template.yaml"
+    params: "{{ playbook_dir }}/params/jenkins-rolebindings/test"
+    namespace: labs-test
