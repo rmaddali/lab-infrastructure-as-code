@@ -34,4 +34,4 @@ parameters:
 - name: USER_NAME
   description: The short username
   displayName: Short Username
-  value: default
+  value: jenkins
