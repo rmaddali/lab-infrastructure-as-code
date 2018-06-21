@@ -3,10 +3,6 @@
 set -x
 set -e
 
-## Remove any user-specific settings from the inventory
-egrep -r "user[0-9]*" params/* | awk -F":" '{print $1}' | sort | uniq | grep -v openshift-template | xargs -r -n 1 sed -i 's@ (user[0-9]*)$@@g'
-egrep -r "user[0-9]*" params/* | awk -F":" '{print $1}' | sort | uniq | grep -v openshift-template | xargs -r -n 1 sed -i 's@user[0-9]*$@@g'
-
 minishift addons enable anyuid
 minishift addons enable admin-
 minishift addons enable xpaas
@@ -20,6 +16,8 @@ minishift start --skip-registration --iso-url=centos --cpus=4 --memory=10GB --vm
 DOCKER_COMMAND="docker run -v $HOME/.kube/config:/openshift-applier/.kube/config:z -w /tmp/my-inventory -u root -v $PWD:/tmp/my-inventory -e INVENTORY_PATH=/tmp/my-inventory -t redhatcop/openshift-applier"
 
 oc login -u developer -p developer --insecure-skip-tls-verify=true https://$(minishift ip):8443/
+
+${DOCKER_COMMAND} ./clean-unique-names.sh
 
 ${DOCKER_COMMAND} ansible-galaxy install -r requirements.yml --roles-path=roles
 
