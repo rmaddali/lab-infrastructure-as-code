@@ -109,3 +109,17 @@ openshift_cluster_content:
     template: "{{ playbook_dir }}/openshift-templates/service-account-rolebinding/template.yaml"
     params: "{{ playbook_dir }}/params/service-account-rolebinding/default-test"
     namespace: "{{ test_namespace }}"
+- object: databases
+  content:
+  - name: database
+    template: openshift//postgresql-persistent
+    params: "{{ playbook_dir }}/params/postgresql/test"
+    namespace: "{{ test_namespace }}"
+    tags:
+    - postgresql
+  - name: database
+    template: openshift//postgresql-persistent
+    params: "{{ playbook_dir }}/params/postgresql/dev"
+    namespace: "{{ dev_namespace }}"
+    tags:
+    - postgresql

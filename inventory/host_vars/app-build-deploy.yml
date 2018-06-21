@@ -30,12 +30,6 @@ openshift_cluster_content:
     - vertx-build
 - object: test-stage
   content:
-  - name: database
-    template: openshift//postgresql-persistent
-    params: "{{ playbook_dir }}/params/postgresql/test"
-    namespace: "{{ test_namespace }}"
-    tags:
-    - postgresql
   - name: noun-app
     template: "{{ playbook_dir }}/openshift-templates/node-app-deploy/template.yaml"
     params: "{{ playbook_dir }}/params/noun-service/deploy"
@@ -68,12 +62,6 @@ openshift_cluster_content:
     - java-deploy
 - object: dev-stage
   content:
-  - name: database
-    template: openshift//postgresql-persistent
-    params: "{{ playbook_dir }}/params/postgresql/dev"
-    namespace: "{{ dev_namespace }}"
-    tags:
-    - postgresql
   - name: noun-app
     template: "{{ playbook_dir }}/openshift-templates/node-app-deploy/template.yaml"
     params: "{{ playbook_dir }}/params/noun-service/deploy"
