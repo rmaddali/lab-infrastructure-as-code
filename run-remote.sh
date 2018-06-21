@@ -12,3 +12,5 @@ ansible-galaxy install -r requirements.yml --roles-path=roles
 ansible-playbook unique-projects-playbook.yaml -i inventory/ -e "project_name_postfix=${USERNAME}" -e target=bootstrap
 
 ansible-playbook unique-projects-playbook.yaml -i inventory/ -e "project_name_postfix=${USERNAME}" -e target=tools
+
+ansible-playbook unique-projects-playbook.yaml -i inventory/ -e "project_name_postfix=${USERNAME}" -e target=apps

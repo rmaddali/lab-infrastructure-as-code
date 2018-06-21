@@ -21,4 +21,4 @@ ansible-playbook apply.yml -i inventory/ -e target=bootstrap
 
 ansible-playbook apply.yml -i inventory/ -e target=tools
 
-#ansible-playbook apply.yml -i inventory/ -e target=apps
+ansible-playbook apply.yml -i inventory/ -e target=apps
