@@ -4,8 +4,8 @@ set -x
 set -e
 
 ## Remove any user-specific settings from the inventory
-egrep -r "user[0-9]*" * | awk -F":" '{print $1}' | sort | uniq | xargs -n 1 sed -i 's@ (user[0-9]*)$@@g'
-egrep -r "user[0-9]*" * | awk -F":" '{print $1}' | sort | uniq | xargs -n 1 sed -i 's@user[0-9]*$@@g'
+egrep -r "user[0-9]*" * | awk -F":" '{print $1}' | sort | uniq | grep -v openshift-template | xargs -n 1 sed -i 's@ (user[0-9]*)$@@g'
+egrep -r "user[0-9]*" * | awk -F":" '{print $1}' | sort | uniq | grep -v openshift-template | xargs -n 1 sed -i 's@user[0-9]*$@@g'
 
 export USERNAME='user10'
 
