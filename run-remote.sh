@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-set -x
-set -e
+# Uncomment for debugging
+#set -x
+#set -e
 
 if [[ "${OPENSHIFT_USERNAME}X" == "X" ]]; then
     printf "Enter your OpenShift user ID: "

@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-set -x
-set -e
+# Uncomment for debugging
+#set -x
+#set -e
 
 minishift addons enable anyuid
 minishift addons enable admin-
