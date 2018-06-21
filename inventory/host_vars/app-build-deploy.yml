@@ -10,18 +10,12 @@ openshift_cluster_content:
     namespace: "{{ ci_cd_namespace }}"
     tags:
     - npm-build
-  - name: noun-app-build
+  - name: adjective-app-build
     template: "{{ playbook_dir }}/openshift-templates/s2i-app-build/template-no-secrets.yaml"
     params: "{{ playbook_dir }}/params/adjective-service/build"
     namespace: "{{ ci_cd_namespace }}"
     tags:
     - spring-build
-  - name: insult-app-build
-    template: "{{ playbook_dir }}/openshift-templates/s2i-app-build/template-no-secrets.yaml"
-    params: "{{ playbook_dir }}/params/insult-service/build"
-    namespace: "{{ ci_cd_namespace }}"
-    tags:
-    - vertx-build
   - name: ui-app-build
     template: "{{ playbook_dir }}/openshift-templates/s2i-app-build/template-no-secrets.yaml"
     params: "{{ playbook_dir }}/params/ui-service/build"
@@ -48,12 +42,6 @@ openshift_cluster_content:
     namespace: "{{ dev_namespace }}"
     tags:
     - java-deploy
-  - name: insult-app
-    template: "{{ playbook_dir }}/openshift-templates/vertx-app-deploy/template.yaml"
-    params: "{{ playbook_dir }}/params/insult-service/deploy"
-    namespace: "{{ dev_namespace }}"
-    tags:
-    - vertx-deploy
   - name: ui-app
     template: "{{ playbook_dir }}/openshift-templates/vertx-app-deploy/template.yaml"
     params: "{{ playbook_dir }}/params/ui-service/deploy"
@@ -86,12 +74,6 @@ openshift_cluster_content:
     namespace: "{{ test_namespace }}"
     tags:
     - java-deploy
-  - name: insult-app
-    template: "{{ playbook_dir }}/openshift-templates/vertx-app-deploy/template.yaml"
-    params: "{{ playbook_dir }}/params/insult-service/deploy"
-    namespace: "{{ test_namespace }}"
-    tags:
-    - vertx-deploy
   - name: ui-app
     template: "{{ playbook_dir }}/openshift-templates/vertx-app-deploy/template.yaml"
     params: "{{ playbook_dir }}/params/ui-service/deploy"
