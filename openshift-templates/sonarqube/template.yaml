@@ -255,7 +255,7 @@ objects:
           - name: JDBC_USERNAME
             valueFrom:
               secretKeyRef:
-                key: database-user
+                key: database-
                 name: sonardb
           - name: JDBC_PASSWORD
             valueFrom:
