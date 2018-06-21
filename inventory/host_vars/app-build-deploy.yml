@@ -28,40 +28,14 @@ openshift_cluster_content:
     namespace: "{{ ci_cd_namespace }}"
     tags:
     - vertx-build
-- object: dev-stage
-  content:
-  - name: noun-app
-    template: "{{ playbook_dir }}/openshift-templates/node-app-deploy/template.yaml"
-    params: "{{ playbook_dir }}/params/noun-service/deploy"
-    namespace: "{{ dev_namespace }}"
-    tags:
-    - npm-deploy
-  - name: adjective-app
-    template: "{{ playbook_dir }}/openshift-templates/spring-app-deploy/template.yaml"
-    params: "{{ playbook_dir }}/params/adjective-service/deploy"
-    namespace: "{{ dev_namespace }}"
-    tags:
-    - java-deploy
-  - name: ui-app
-    template: "{{ playbook_dir }}/openshift-templates/vertx-app-deploy/template.yaml"
-    params: "{{ playbook_dir }}/params/ui-service/deploy"
-    namespace: "{{ dev_namespace }}"
-    tags:
-    - vertx-deploy
-  - name: kafka-app
-    template: "{{ playbook_dir }}/openshift-templates/vertx-app-deploy/template.yaml"
-    params: "{{ playbook_dir }}/params/kafka-service/deploy"
-    namespace: "{{ dev_namespace }}"
-    tags:
-    - vertx-deploy
-  - name: fabric8-rolebinding
-    template: "{{ playbook_dir }}/openshift-templates/fabric8-role-bindings/template.yaml"
-    params: "{{ playbook_dir }}/params/java-app/fabric8_dev"
-    namespace: "{{ dev_namespace }}"
-    tags:
-    - java-deploy
 - object: test-stage
   content:
+  - name: database
+    template: openshift//postgresql-persistent
+    params: "{{ playbook_dir }}/params/postgresql/test"
+    namespace: "{{ test_namespace }}"
+    tags:
+    - postgresql
   - name: noun-app
     template: "{{ playbook_dir }}/openshift-templates/node-app-deploy/template.yaml"
     params: "{{ playbook_dir }}/params/noun-service/deploy"
@@ -90,5 +64,43 @@ openshift_cluster_content:
     template: "{{ playbook_dir }}/openshift-templates/fabric8-role-bindings/template.yaml"
     params: "{{ playbook_dir }}/params/java-app/fabric8_dev"
     namespace: "{{ test_namespace }}"
+    tags:
+    - java-deploy
+- object: dev-stage
+  content:
+  - name: database
+    template: openshift//postgresql-persistent
+    params: "{{ playbook_dir }}/params/postgresql/dev"
+    namespace: "{{ dev_namespace }}"
+    tags:
+    - postgresql
+  - name: noun-app
+    template: "{{ playbook_dir }}/openshift-templates/node-app-deploy/template.yaml"
+    params: "{{ playbook_dir }}/params/noun-service/deploy"
+    namespace: "{{ dev_namespace }}"
+    tags:
+    - npm-deploy
+  - name: adjective-app
+    template: "{{ playbook_dir }}/openshift-templates/spring-app-deploy/template.yaml"
+    params: "{{ playbook_dir }}/params/adjective-service/deploy"
+    namespace: "{{ dev_namespace }}"
+    tags:
+    - java-deploy
+  - name: ui-app
+    template: "{{ playbook_dir }}/openshift-templates/vertx-app-deploy/template.yaml"
+    params: "{{ playbook_dir }}/params/ui-service/deploy"
+    namespace: "{{ dev_namespace }}"
+    tags:
+    - vertx-deploy
+  - name: kafka-app
+    template: "{{ playbook_dir }}/openshift-templates/vertx-app-deploy/template.yaml"
+    params: "{{ playbook_dir }}/params/kafka-service/deploy"
+    namespace: "{{ dev_namespace }}"
+    tags:
+    - vertx-deploy
+  - name: fabric8-rolebinding
+    template: "{{ playbook_dir }}/openshift-templates/fabric8-role-bindings/template.yaml"
+    params: "{{ playbook_dir }}/params/java-app/fabric8_dev"
+    namespace: "{{ dev_namespace }}"
     tags:
     - java-deploy
