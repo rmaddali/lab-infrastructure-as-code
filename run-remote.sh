@@ -3,6 +3,10 @@
 set -x
 set -e
 
+## Remove any user-specific settings from the inventory
+egrep -r "user[0-9]*" * | awk -F":" '{print $1}' | sort | uniq | xargs -n 1 sed -i 's@ (user[0-9]*)$@@g'
+egrep -r "user[0-9]*" * | awk -F":" '{print $1}' | sort | uniq | xargs -n 1 sed -i 's@user[0-9]*$@@g'
+
 export USERNAME='user10'
 
 oc login -u ${USERNAME} -p "r3dh4t1!" --insecure-skip-tls-verify=true https://master.qcon.openshift.opentlc.com/

@@ -3,8 +3,12 @@
 set -x
 set -e
 
+## Remove any user-specific settings from the inventory
+egrep -r "user[0-9]*" * | awk -F":" '{print $1}' | sort | uniq | xargs -n 1 sed -i 's@ (user[0-9]*)$@@g'
+egrep -r "user[0-9]*" * | awk -F":" '{print $1}' | sort | uniq | xargs -n 1 sed -i 's@user[0-9]*$@@g'
+
 minishift addons enable anyuid
-minishift addons enable admin-user
+minishift addons enable admin-
 minishift addons enable xpaas
 minishift addons disable che
 minishift addons disable registry-route
