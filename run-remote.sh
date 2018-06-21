@@ -3,7 +3,7 @@
 set -x
 set -e
 
-if [[ "${OPENSHIFT_USER}X" == "X" ]]; then
+if [[ "${OPENSHIFT_USERNAME}X" == "X" ]]; then
     printf "Enter your OpenShift user ID: "
     read username
     echo ${username} | grep "^user[0-9]*" && export OPENSHIFT_USERNAME="${username}" || echo "Invalid username"
