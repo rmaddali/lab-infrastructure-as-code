@@ -1,4 +1,4 @@
-PROJECT_NAMESPACE=labs-devuser10
-PIPELINES_NAMESPACE=labs-devuser10
+PROJECT_NAMESPACE=labs-devuser3
+PIPELINES_NAMESPACE=labs-devuser3
 ROLE_REF=view
 USER_NAME=default
